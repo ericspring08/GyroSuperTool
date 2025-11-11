@@ -121,7 +121,7 @@ function imuRowsToCoordinates(rows) {
       // Integrate velocity → position
       position.x += velocity.x * dt;
       position.y += velocity.y * dt;
-      position.z += velocity.z * dt;
+      position.z -= velocity.z * dt;
 
       coordinates.push({ ...position });
     });
