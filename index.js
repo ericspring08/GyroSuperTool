@@ -85,9 +85,9 @@ function imuRowsToCoordinates(rows) {
 
     rows.forEach((row) => {
       // Convert acceleration from g → m/s²
-      const ax = parseFloat(row["AccX(g)"]) * 9.80665;
+      const az = parseFloat(row["AccX(g)"]) * 9.80665;
       const ay = parseFloat(row["AccY(g)"]) * 9.80665;
-      const az = parseFloat(row["AccZ(g)"]) * 9.80665;
+      const ax = parseFloat(row["AccZ(g)"]) * 9.80665;
 
       // Quaternion values
       const q0 = parseFloat(row["Q0()"]) / 1000;  // WT901 scales Q0 by 1000
