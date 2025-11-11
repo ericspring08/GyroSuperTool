@@ -1,0 +1,21 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+        <script src="https://cdn.plot.ly/plotly-3.2.0.min.js" charset="utf-8"></script>
+        <title>Gyro Path Finder</title>
+    </head>
+    <div>
+       <div class = "flex flex-col items-center justify-between h-screen">
+      <div class="text-4xl py-14">Display Gyro Path</div>
+        <div class="flex flex-row items-center justify-center w-1/2 gap-2 p-5">
+          <input class="border border-gray-300 rounded p-2" type="file" id = "fileInput"/>
+          <button class="bg-blue-500 text-white py-2 px-4 rounded" id = "generate-btn">Generate Graph</button>
+        </div>
+        <div id = "graph" class="w-screen h-2/3"></div>
+      <div class="text-sm text-gray-500 pb-2">Created by Eric Zhang</div>
+    </div> 
+    </div>
+    <script src="index.js"></script>
+</html>
