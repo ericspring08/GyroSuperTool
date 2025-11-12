@@ -54,18 +54,50 @@ generatebtn.addEventListener('click', () => {
           // convert to coordinates and set plot data
             const coordinates = imuRowsToCoordinates(parsed);
 
-            Plotly.newPlot('graph', [{
+            if (coordinates.length > 0) {
+              const start = coordinates[0];
+              const finish = coordinates[coordinates.length - 1];
+
+              const pathTrace = {
                 type: 'scatter3d',
                 mode: 'lines',
                 x: coordinates.map(p => p.x),
                 y: coordinates.map(p => p.y),
                 z: coordinates.map(p => p.z),
                 opacity: 1,
-                line: {
-                    width: 6,
-                    reversescale: false
-                }
-                }], {});
+                line: { width: 6, color: 'blue' },
+                name: 'Path'
+              };
+
+              const startTrace = {
+                type: 'scatter3d',
+                mode: 'markers+text',
+                x: [start.x],
+                y: [start.y],
+                z: [start.z],
+                marker: { size: 10, color: 'green', symbol: 'circle' },
+                text: ['Start'],
+                textposition: 'top center',
+                name: 'Start'
+              };
+
+              const finishTrace = {
+                type: 'scatter3d',
+                mode: 'markers+text',
+                x: [finish.x],
+                y: [finish.y],
+                z: [finish.z],
+                marker: { size: 12, color: 'red', symbol: 'diamond' },
+                text: ['Finish'],
+                textposition: 'top center',
+                name: 'Finish'
+              };
+
+              Plotly.newPlot('graph', [pathTrace, startTrace, finishTrace], {
+                scene: { aspectmode: 'auto' },
+                margin: { l: 0, r: 0, b: 0, t: 0 }
+              });
+            }
         }
         // Further processing to generate graph can be done here
       };
@@ -121,7 +153,7 @@ function imuRowsToCoordinates(rows) {
       // Integrate velocity → position
       position.x += velocity.x * dt;
       position.y += velocity.y * dt;
-      position.z -= velocity.z * dt;
+      position.z += velocity.z * dt;
 
       coordinates.push({ ...position });
     });
